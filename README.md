@@ -1,73 +1,240 @@
-# Welcome to your Lovable project
+# 🤖 Chatbot RAG para WhatsApp
 
-## Project info
+Um sistema completo de chatbot com Retrieval-Augmented Generation (RAG) para atendimento automático via WhatsApp, desenvolvido com React, TypeScript e integração com OpenAI.
 
-**URL**: https://lovable.dev/projects/f9a410de-8581-4097-a174-4014379989b4
+## 🚀 Características Principais
 
-## How can I edit this code?
+### ✨ Interface de Administração Completa
+- **Dashboard** com métricas em tempo real
+- **Gerenciamento de Documentos** para base de conhecimento
+- **Monitor de Conversas** para acompanhamento das interações
+- **Analytics Avançado** com insights detalhados
+- **Configuração do Bot** centralizada
 
-There are several ways of editing your application.
+### 🎨 Design System Profissional
+- Interface moderna e responsiva
+- Design system consistente com Tailwind CSS
+- Componentes shadcn/ui customizados
+- Animações e transições suaves
+- Suporte a dark/light mode
 
-**Use Lovable**
+### 🔧 Tecnologias Utilizadas
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f9a410de-8581-4097-a174-4014379989b4) and start prompting.
+#### Frontend
+- **React 18** - Framework principal
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Framework CSS
+- **Vite** - Build tool otimizado
+- **React Router** - Roteamento
+- **TanStack Query** - Gerenciamento de estado
+- **Lucide Icons** - Ícones consistentes
 
-Changes made via Lovable will be committed automatically to this repo.
+#### Componentes UI
+- **shadcn/ui** - Biblioteca de componentes
+- **Radix UI** - Primitivos acessíveis
+- **Recharts** - Gráficos e visualizações
+- **React Hook Form** - Formulários performáticos
 
-**Use your preferred IDE**
+## 🛠️ Instalação e Desenvolvimento
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Pré-requisitos
+```bash
+# Node.js 18+
+node --version
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# npm ou yarn
+npm --version
+```
 
-Follow these steps:
+### Setup Local
+```bash
+# Clonar o repositório
+git clone <repository-url>
+cd chatbot-rag-whatsapp
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Instalar dependências
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Iniciar servidor de desenvolvimento
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Scripts Disponíveis
+```bash
+# Desenvolvimento
+npm run dev          # Servidor de desenvolvimento
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+# Build
+npm run build        # Build para produção
+npm run preview      # Preview do build
 
-**Use GitHub Codespaces**
+# Qualidade de Código
+npm run lint         # ESLint
+npm run type-check   # TypeScript check
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🏗️ Arquitetura do Sistema
 
-## What technologies are used for this project?
+### Estrutura do Projeto
+```
+src/
+├── components/          # Componentes React
+│   ├── ui/             # Componentes UI base (shadcn)
+│   ├── Dashboard.tsx   # Painel principal
+│   ├── DocumentManager.tsx  # Gerenciamento de docs
+│   ├── ChatMonitor.tsx # Monitor de conversas
+│   ├── Analytics.tsx   # Analytics e métricas
+│   ├── BotConfig.tsx   # Configurações do bot
+│   └── Sidebar.tsx     # Navegação lateral
+├── pages/              # Páginas da aplicação
+├── hooks/              # Hooks customizados
+├── lib/                # Utilitários e configurações
+├── assets/             # Assets estáticos
+└── types/              # Definições TypeScript
+```
 
-This project is built with:
+### Design System
+O projeto utiliza um design system robusto baseado em:
+- **Tokens de Design** no `index.css`
+- **Configuração Tailwind** customizada
+- **Variantes de Componentes** consistentes
+- **Gradientes e Animações** predefinidos
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🚀 Deploy no Google Cloud Platform
 
-## How can I deploy this project?
+### Deploy Rápido
+```bash
+# Executar script automatizado
+chmod +x deploy.sh
+./deploy.sh
+```
 
-Simply open [Lovable](https://lovable.dev/projects/f9a410de-8581-4097-a174-4014379989b4) and click on Share -> Publish.
+### Deploy Manual
+```bash
+# Build da aplicação
+npm run build
 
-## Can I connect a custom domain to my Lovable project?
+# Build e push da imagem Docker
+docker build -t gcr.io/YOUR_PROJECT_ID/chatbot-rag .
+docker push gcr.io/YOUR_PROJECT_ID/chatbot-rag
 
-Yes, you can!
+# Deploy no Cloud Run
+gcloud run deploy chatbot-rag \
+    --image gcr.io/YOUR_PROJECT_ID/chatbot-rag \
+    --region us-central1 \
+    --platform managed \
+    --allow-unauthenticated
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Arquivos de Deploy Incluídos
+- `Dockerfile` - Configuração Docker otimizada
+- `nginx.conf` - Configuração Nginx para produção
+- `cloudbuild.yaml` - CI/CD com Cloud Build
+- `deploy.sh` - Script automatizado de deploy
+- `app.yaml` - Configuração App Engine (alternativa)
+- `gcp-setup.md` - Guia completo de setup GCP
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🔧 Configuração para Backend
+
+Para conectar com um backend Node.js/Express, configure:
+
+### Variáveis de Ambiente
+```env
+VITE_API_URL=https://your-backend-api.com
+VITE_WHATSAPP_WEBHOOK=https://your-webhook.com
+```
+
+### Integração com APIs
+O frontend está preparado para integrar com:
+- **OpenAI API** - Geração de respostas
+- **WhatsApp Business API** - Mensagens
+- **Backend RAG** - Busca vetorial
+- **Analytics API** - Métricas e relatórios
+
+## 📊 Funcionalidades Implementadas
+
+### ✅ Dashboard
+- Métricas em tempo real
+- Indicadores de performance
+- Status do sistema
+- Atividade recente
+
+### ✅ Gerenciamento de Documentos
+- Upload drag & drop
+- Processamento de PDFs, DOCX, TXT
+- Status de processamento
+- Busca e filtros
+
+### ✅ Monitor de Conversas
+- Lista de conversas ativas
+- Visualização de mensagens
+- Status de entrega
+- Filtros avançados
+
+### ✅ Analytics
+- Gráficos de uso
+- Tópicos populares
+- Taxa de satisfação
+- Métricas de API
+
+### ✅ Configuração do Bot
+- Personalização de respostas
+- Configuração de horários
+- Integração com APIs
+- Configurações avançadas
+
+## 🔐 Segurança e Performance
+
+### Características de Produção
+- **Nginx** otimizado para serving estático
+- **Gzip compression** habilitada
+- **Security headers** configurados
+- **Health checks** para GCP
+- **Caching** de assets estáticos
+
+### Performance
+- **Code splitting** automático
+- **Lazy loading** de componentes
+- **Otimização de imagens**
+- **Bundle analysis** integrado
+
+## 📚 Próximos Passos
+
+### Backend Integration
+1. Desenvolver API Node.js/Express
+2. Implementar RAG com vetorização
+3. Conectar WhatsApp Business API
+4. Integrar OpenAI API
+5. Setup de banco de dados
+
+### Funcionalidades Avançadas
+- [ ] Autenticação de usuários
+- [ ] Multi-tenancy
+- [ ] Relatórios PDF
+- [ ] Notificações push
+- [ ] API webhooks
+- [ ] Integração com CRM
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🆘 Suporte
+
+- 📧 Email: support@chatbot-rag.com
+- 📚 Documentação: [docs.chatbot-rag.com](https://docs.chatbot-rag.com)
+- 🐛 Issues: [GitHub Issues](https://github.com/your-repo/issues)
+
+---
+
+**Desenvolvido com ❤️ para automatizar atendimento ao cliente via WhatsApp**
+
+🚀 **Deploy pronto para produção no Google Cloud Platform!**

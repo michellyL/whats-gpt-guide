@@ -1,0 +1,45 @@
+# Google App Engine configuration (alternative to Cloud Run)
+runtime: nodejs18
+
+# Basic scaling configuration
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
+  target_cpu_utilization: 0.6
+
+# Resource allocation
+resources:
+  cpu: 1
+  memory_gb: 1
+
+# Environment variables
+env_variables:
+  NODE_ENV: "production"
+
+# Health check configuration
+readiness_check:
+  path: "/health"
+  check_interval_sec: 5
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+
+liveness_check:
+  path: "/health"
+  check_interval_sec: 30
+  timeout_sec: 4
+  failure_threshold: 4
+  success_threshold: 2
+
+# Handlers for static files and routing
+handlers:
+  # Static assets
+  - url: /assets
+    static_dir: dist/assets
+    secure: always
+
+  # All other routes to index.html (for React Router)
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
+    secure: always
